@@ -64,4 +64,17 @@ class SyncHistory extends Model
 
         return $history->save();
     }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return array_filter([
+            'status' => $this->status === self::STATUS_SUCCESS ? 'SUCCESS' : 'FAIL',
+            'message' => $this->message,
+            'amount' => $this->amount,
+            'date' => $this->created_at->format(DATE_ATOM),
+        ]);
+    }
 }
