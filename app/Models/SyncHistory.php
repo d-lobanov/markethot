@@ -2,8 +2,27 @@
 
 namespace Market\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
+/**
+ * Market\Models\SyncHistory
+ *
+ * @property int $id
+ * @property int $status
+ * @property int|null $amount
+ * @property string|null $message
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|SyncHistory whereAmount($value)
+ * @method static Builder|SyncHistory whereCreatedAt($value)
+ * @method static Builder|SyncHistory whereId($value)
+ * @method static Builder|SyncHistory whereMessage($value)
+ * @method static Builder|SyncHistory whereStatus($value)
+ * @method static Builder|SyncHistory whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class SyncHistory extends Model
 {
     const STATUS_SUCCESS = 0;
