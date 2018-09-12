@@ -12,7 +12,7 @@ docker exec market.app php artisan init:app
 ```
 
 # Fetching data
-By default all data fetching automatically once every thirty minutes. To force update run this command
+By default all data fetching automatically once [every thirty minutes](/app/Console/Kernel.php#28). To force update run this command
 ```
 docker exec market.app php artisan fetch:data
 ```
