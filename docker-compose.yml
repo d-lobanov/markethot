@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:latest
+    container_name: market.web
+    ports:
+      - '80:80'
+    volumes:
+      - ./:/var/www
+      - ./docker/web/site.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+
+  app:
+    image: dmitrylobanow/market_app
+    container_name: market.app
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+      - redis
+      - es
+
+  db:
+    image: mysql
+    container_name: market.db
+    environment:
+      - MYSQL_DATABASE=market
+      - MYSQL_ROOT_PASSWORD=market
+    volumes:
+      - ./docker/db/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+    ports:
+      - '3306:3306'
+
+  redis:
+    image: redis
+    container_name: market.redis
+
+  es:
+    image: elasticsearch:5
+    container_name: market.es
+    ports:
+      - '9200:9200'
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
